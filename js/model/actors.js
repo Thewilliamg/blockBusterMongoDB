@@ -45,4 +45,72 @@ export class Actors extends connect{
         return data;
     }
     // Consulta 3.
+    async getAllAuthorsAwardsCu(){
+        await this.conexion.connect();
+        const collection = this.db.collection('actors');
+        const data = await collection.aggregate(
+          [
+            {
+                $unwind: "$awards"
+              },
+              {
+                $group: {
+                  _id: "$_id",
+                  name: {$first: "$full_name"},
+                  Total: {
+                    $sum: 1
+                  },
+                }
+              }
+          ]
+        ).toArray();
+        await this.conexion.close();
+        return data;
+    }
+    // Consulta 4.
+    async getAllAuthor1980(){
+        await this.conexion.connect();
+        const collection = this.db.collection('actors');
+        const data = await collection.aggregate(
+          [
+            {
+              $match: {
+                "date_of_birth": {$gt:"1980-12-30"}
+              }
+            }
+          ]
+        ).toArray();
+        await this.conexion.close();
+        return data;
+    }
+    // Consulta 5.
+    async getAuthorsMostAwards(){
+        await this.conexion.connect();
+        const collection = this.db.collection('actors');
+        const data = await collection.aggregate(
+          [
+            {
+                $unwind: "$awards",
+              },
+              {
+                $group: {
+                  _id: "$_id",
+                  full_name: { "$first": "$full_name" },
+                  total: { $sum: 1 },
+                }
+              },
+              {
+                $sort: {
+                  total: -1,
+                }
+              },
+              {
+                $limit: 1,
+              }
+          ]
+        ).toArray();
+        await this.conexion.close();
+        return data;
+    }
+    //10
 }

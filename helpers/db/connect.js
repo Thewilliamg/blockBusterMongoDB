@@ -54,7 +54,7 @@ export class connect {
         await this.#open();
     }
     async #open() {
-        console.log("Drive armado");
+        // console.log("Drive armado");
         this.#url = `${this.#host}${this.user}:${this.#pass}@${this.cluster}:${this.port}`;
         this.conexion = new MongoClient(this.#url);
         await this.conexion.connect();

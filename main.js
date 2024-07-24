@@ -11,15 +11,16 @@ const objM = new Movies();
 // console.log(`7) Encontrar películas donde el actor con id 1 haya participado:`, await objM.getAuthorId1());
 
 objM.destructor()
-const objA = new Actors();
 
+const objA = new Actors();
 
 // 2.
 // console.log(`2) Encontrar todos los actores que han ganado premios Oscar:`, await objA.getAllActorsAwards() );
 // 3.
-
+// console.log(`3) Encontrar la cantidad total de premios que ha ganado cada actor:`,await objA.getAllAuthorsAwardsCu());
 // 4.
-
+// console.log(`4) Obtener todos los actores nacidos después de 1980:`,await objA.getAllAuthor1980());
 // 5.
+console.log(`5) Encontrar el actor con más premios:`,await objA.getAuthorsMostAwards());
 
 objA.destructor()
